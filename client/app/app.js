@@ -1,48 +1,33 @@
-'use strict';
+(function(){
 
-angular.module('linkApp', [
-  'ngCookies',
-  'ngResource',
-  'ngSanitize',
-  'btford.socket-io',
-  'ui.router',
-  'ui.bootstrap'
-])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {
+  'use strict';
+
+  angular
+    .module('linkApp', [
+    'ngCookies',
+    'ngResource',
+    'ngSanitize',
+    'btford.socket-io',
+    'ui.router',
+    'ui.bootstrap'
+  ])
+    .config(config)
+    .run(run);
+
+
+  function config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
     $urlRouterProvider
       .otherwise('/');
+    
+    // $locationProvider.html5Mode(true);
+    $httpProvider.interceptors.push('AuthinterceptorFtry');
 
-    $locationProvider.html5Mode(true);
-    $httpProvider.interceptors.push('authInterceptor');
-  })
+    $provide.decorator('$exceptionHandler',
+        ['$delegate', '$log', extendExceptionHandler]);
+  };
 
-  .factory('authInterceptor', function ($rootScope, $q, $cookieStore, $location) {
-    return {
-      // Add authorization token to headers
-      request: function (config) {
-        config.headers = config.headers || {};
-        if ($cookieStore.get('token')) {
-          config.headers.Authorization = 'Bearer ' + $cookieStore.get('token');
-        }
-        return config;
-      },
+  function run ($rootScope, $location, Auth) {
 
-      // Intercept 401s and redirect you to login
-      responseError: function(response) {
-        if(response.status === 401) {
-          $location.path('/login');
-          // remove any stale tokens
-          $cookieStore.remove('token');
-          return $q.reject(response);
-        }
-        else {
-          return $q.reject(response);
-        }
-      }
-    };
-  })
-
-  .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
@@ -51,4 +36,25 @@ angular.module('linkApp', [
         }
       });
     });
-  });
+  }
+
+  function extendExceptionHandler($delegate, $log) {
+
+    // toaster.pop('error', 'test', 'test');
+
+    return function (exception, cause) {
+        $delegate(exception, cause);
+        var errorData = {
+            exception: exception,
+            cause: cause
+        };
+        var msg = 'ERROR PREFIX' + exception.message;
+        $log.error(msg, errorData);
+
+        // Log during dev with http://toastrjs.com
+        // or any other technique you prefer
+        toastr.error(msg);
+    };
+  }
+
+})();

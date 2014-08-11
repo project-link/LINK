@@ -1,7 +1,13 @@
-'use strict';
+(function(){
 
-angular.module('linkApp')
-  .config(function ($stateProvider) {
+  'use strict';
+
+  angular
+    .module('linkApp')
+    .config(config);
+
+
+  function config ($stateProvider) {
     $stateProvider
       .state('login', {
         url: '/login',
@@ -19,4 +25,6 @@ angular.module('linkApp')
         controller: 'SettingsCtrl',
         authenticate: true
       });
-  });
+  }
+
+})();

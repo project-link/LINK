@@ -1,7 +1,13 @@
-'use strict';
+(function(){
 
-angular.module('linkApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  'use strict';
+
+  angular
+    .module('linkApp')
+    .controller('MainCtrl', MainCtrl);
+
+  function MainCtrl ($scope, $http, socket, Auth) {
+
     $scope.awesomeThings = [];
 
     $http.get('/api/things').success(function(awesomeThings) {
@@ -24,4 +30,6 @@ angular.module('linkApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
-  });
+  }
+
+})();

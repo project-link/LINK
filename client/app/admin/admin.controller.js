@@ -1,7 +1,12 @@
-'use strict';
+(function(){
 
-angular.module('linkApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User) {
+  'use strict';
+
+  angular
+    .module('linkApp')
+    .controller('AdminCtrl', AdminCtrl);
+
+  function AdminCtrl ($scope, $http, Auth, User) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
@@ -14,4 +19,6 @@ angular.module('linkApp')
         }
       });
     };
-  });
+  }
+
+})();
