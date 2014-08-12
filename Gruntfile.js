@@ -16,7 +16,9 @@ module.exports = function (grunt) {
     ngtemplates: 'grunt-angular-templates',
     cdnify: 'grunt-google-cdn',
     protractor: 'grunt-protractor-runner',
-    injector: 'grunt-asset-injector'
+    injector: 'grunt-asset-injector',
+    nggettext_extract: 'grunt-angular-gettext',
+    nggettext_compile: 'grunt-angular-gettext',
   });
 
   // Time how long tasks take. Can help when optimizing build times
@@ -32,6 +34,29 @@ module.exports = function (grunt) {
       dist: 'dist',
       mobile: 'mobile'
     },
+
+    nggettext_extract: {
+      pot: {
+        files: {
+          'client/components/translation/origin_template.pot':
+          ['<%= yeoman.client %>/app/**/*.html',
+           '<%= yeoman.client %>/components/translation/*.html']
+        }
+      },
+    },
+
+    nggettext_compile: {
+      all: {
+        options: {
+          module: 'linkApp'
+        },
+        files: {
+          '<%= yeoman.client %>/components/translation/translations.js': 
+          ['<%= yeoman.client %>/components/translation/*.po']
+        }
+      },
+    },
+    
     express: {
       options: {
         port: process.env.PORT || 9000

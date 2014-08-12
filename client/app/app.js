@@ -9,7 +9,8 @@
     'ngSanitize',
     'btford.socket-io',
     'ui.router',
-    'ui.bootstrap'
+    'ui.bootstrap',
+    'gettext'
   ])
     .config(config)
     .run(run);
@@ -26,8 +27,11 @@
         ['$delegate', '$log', extendExceptionHandler]);
   };
 
-  function run ($rootScope, $location, Auth) {
+  function run ($rootScope, $location, Auth, gettextCatalog) {
 
+    // TODO - default language setting through Locale Info.
+    gettextCatalog.currentLanguage = 'ko_KR';
+    
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
       Auth.isLoggedInAsync(function(loggedIn) {
