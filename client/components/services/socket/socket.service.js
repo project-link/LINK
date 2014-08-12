@@ -2,10 +2,10 @@
 'use strict';
 
 angular.module('linkApp')
-  .factory('socket', function(socketFactory) {
+  .factory('socket', function(socketFactory, REMOTE_SOCKET_URI) {
 
     // socket.io now auto-configures its connection when we ommit a connection url
-    var ioSocket = io(null, {
+    var ioSocket = io(REMOTE_SOCKET_URI, {
       // Send auth token on connection, you will need to DI the Auth service above
       // 'query': 'token=' + Auth.getToken()
     });
