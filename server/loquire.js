@@ -11,6 +11,9 @@ GLOBAL.loquire = {
   components: function(name) {
     return require('./components/' + name);
   },
+  utils: function(name) {
+    return require('./utils/' + name);
+  },
   auth: function(name) {
     if (name) {
       name = 'auth.' + name;

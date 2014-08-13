@@ -4,6 +4,7 @@
   "private": true,
   "main": "server/app.js",
   "dependencies": {
+    "bluebird": "^2.2.2",
     "body-parser": "~1.0.0",
     "composable-middleware": "^0.3.0",
     "compression": "~1.0.1",
