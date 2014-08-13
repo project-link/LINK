@@ -1,7 +1,13 @@
-'use strict';
+(function(){
 
-angular.module('linkApp')
-  .controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+  'use strict';
+
+  angular
+    .module('linkApp')
+    .controller('SignupCtrl', SignupCtrl);
+
+
+  function SignupCtrl ($scope, Auth, $location, $window) {
     $scope.user = {};
     $scope.errors = {};
 
@@ -34,4 +40,6 @@ angular.module('linkApp')
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };
-  });
+  }
+
+})();

@@ -1,3 +1,4 @@
+.DS_Store
 node_modules
 public
 .tmp
@@ -5,3 +6,7 @@ public
 client/bower_components
 dist
 /server/config/local.env.js
+mobile/platforms
+mobile/plugins
+mobile/www
+!.gitignore

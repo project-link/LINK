@@ -1,7 +1,13 @@
-'use strict';
+(function(){
 
-angular.module('linkApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  'use strict';
+
+  angular
+    .module('linkApp')
+    .controller('SettingsCtrl', SettingsCtrl);
+
+
+  function SettingsCtrl ($scope, User, Auth) {
     $scope.errors = {};
 
     $scope.changePassword = function(form) {
@@ -17,5 +23,7 @@ angular.module('linkApp')
           $scope.message = '';
         });
       }
-		};
-  });
+    };
+  }
+
+})();

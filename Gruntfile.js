@@ -29,7 +29,8 @@ module.exports = function (grunt) {
     yeoman: {
       // configurable paths
       client: require('./bower.json').appPath || 'client',
-      dist: 'dist'
+      dist: 'dist',
+      mobile: 'mobile'
     },
     express: {
       options: {
@@ -43,7 +44,7 @@ module.exports = function (grunt) {
       },
       prod: {
         options: {
-          script: 'dist/server/app.js'
+          script: '<%= yeoman.dist %>/server/app.js'
         }
       }
     },
@@ -138,10 +139,22 @@ module.exports = function (grunt) {
           dot: true,
           src: [
             '.tmp',
+            // '<%= yeoman.dist %>/*',
             '<%= yeoman.dist %>/*',
             '!<%= yeoman.dist %>/.git*',
             '!<%= yeoman.dist %>/.openshift',
             '!<%= yeoman.dist %>/Procfile'
+          ]
+        }]
+      },
+      mobile: {
+        files: [{
+          dot: true,
+          src: [
+            '.tmp',
+            // '<%= yeoman.dist %>/*',
+            '<%= yeoman.mobile %>/www/*',
+            '!<%= yeoman.mobile %>/www/res'
           ]
         }]
       },
@@ -350,6 +363,18 @@ module.exports = function (grunt) {
           ]
         }]
       },
+      mobile: {
+        expand: true,
+        cwd: '<%= yeoman.dist %>/public',
+        dest: '<%= yeoman.mobile %>/www',
+        src: ['**/*']
+      },
+      s_mobile: {
+        expand: true,
+        cwd: '<%= yeoman.client %>',
+        dest: '<%= yeoman.mobile %>/www',
+        src: ['**/*']
+      },
       styles: {
         expand: true,
         cwd: '<%= yeoman.client %>',
@@ -389,7 +414,8 @@ module.exports = function (grunt) {
 
     mochaTest: {
       options: {
-        reporter: 'spec'
+        reporter: 'spec',
+        require: ['server/app.js', 'server/utils/test.js'],
       },
       src: ['server/**/*.spec.js']
     },
@@ -460,6 +486,110 @@ module.exports = function (grunt) {
         }
       }
     },
+
+    cordovacli: {
+      options: {
+        path: '<%= yeoman.mobile %>',
+        id: 'com.link',
+        name: 'link',
+      },
+      create: {
+        options: {
+          command: ['create','platform', 'plugin'],
+          platforms: ['ios','android'],
+          plugins: ['camera', 'console', 'file', 'network-information']
+        }
+      },
+      add_platforms: {
+        options: {
+          command: 'platform',
+          action: 'add',
+          platforms: ['ios', 'android']
+        }
+      },
+      add_plugins: {
+        options: {
+          command: 'plugin',
+          action: 'add',
+          plugins: [
+              'camera',
+              'console',
+              'file',
+              'network-information',
+              // 'contacts',
+              // 'device',
+              // 'device-motion',
+              // 'device-orientation',
+              // 'dialogs',
+              // 'geolocation',
+              // 'globalization',
+              // 'inappbrowser',
+              // 'media',
+              // 'media-capture',
+              // 'splashscreen',
+              // 'vibration',
+              // 'battery-status'
+              
+          ]
+        }
+      },
+      rm_plugins: {
+        options: {
+          command: 'plugin',
+          action: 'rm',
+          plugins: [
+              'camera',
+              'console',
+              'file',
+              'network-information',
+              // 'media',
+              // 'media-capture',
+              // 'contacts',
+              // 'device',
+              // 'device-motion',
+              // 'device-orientation',
+              // 'dialogs',
+              // 'geolocation',
+              // 'globalization',
+              // 'inappbrowser',
+              // 'splashscreen',
+              // 'vibration',
+              // 'battery-status'
+          ]
+        }
+      },
+      build_ios: {
+        options: {
+          command: 'build',
+          platforms: ['ios']
+        }
+      },
+      build_android: {
+        options: {
+          command: 'build',
+          platforms: ['android']
+        }
+      },
+      emulate_android: {
+        options: {
+          command: 'emulate',
+          platforms: ['android'],
+          args: ['--target','Nexus5']
+        }
+      },
+      run_ios: {
+        options: {
+          command: 'run',
+          platforms: ['ios']
+        }
+      },
+      run_android: {
+        options: {
+          command: 'run',
+          platforms: ['android']
+        }
+      }
+    }
   });
 
   // Used for delaying livereload until after server has restarted
@@ -571,6 +701,49 @@ module.exports = function (grunt) {
     'rev',
     'usemin'
   ]);
+
+
+  grunt.registerTask('run', function (target) {
+
+    if (target === 'android') {
+      return grunt.task.run([
+        'build',
+        'clean:mobile',
+        'copy:mobile',
+        'cordovacli:run_android'
+      ]);
+    }
+    
+    else if (target === 'ios') {
+      return grunt.task.run([
+        'build',
+        'clean:mobile',
+        'copy:mobile',
+        'cordovacli:run_ios'
+      ]);
+    };
+
+  });
+
+  grunt.registerTask('srun', function (target) {
+
+    if (target === 'android') {
+      return grunt.task.run([
+        'clean:mobile',
+        'copy:s_mobile',
+        'cordovacli:run_android'
+      ]);
+    }
+    
+    else if (target === 'ios') {
+      return grunt.task.run([
+        'clean:mobile',
+        'copy:s_mobile',
+        'cordovacli:run_ios'
+      ]);
+    };
+
+  });
 
   grunt.registerTask('default', [
     'newer:jshint',

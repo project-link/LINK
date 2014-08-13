@@ -1,10 +1,16 @@
-'use strict';
+(function(){
 
-angular.module('linkApp')
-  .controller('MainCtrl', function ($scope, $http, socket) {
+  'use strict';
+
+  angular
+    .module('linkApp')
+    .controller('MainCtrl', MainCtrl);
+
+  function MainCtrl ($scope, $http, socket, Auth, REMOTE_URI) {
+
     $scope.awesomeThings = [];
 
-    $http.get('/api/things').success(function(awesomeThings) {
+    $http.get(REMOTE_URI + '/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
@@ -13,15 +19,17 @@ angular.module('linkApp')
       if($scope.newThing === '') {
         return;
       }
-      $http.post('/api/things', { name: $scope.newThing });
+      $http.post(REMOTE_URI + '/api/things', { name: $scope.newThing });
       $scope.newThing = '';
     };
 
     $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+      $http.delete(REMOTE_URI + '/api/things/' + thing._id);
     };
 
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
-  });
+  }
+
+})();
