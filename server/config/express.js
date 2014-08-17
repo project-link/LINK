@@ -5,7 +5,7 @@
 'use strict';
 
 var express = require('express');
-var favicon = require('static-favicon');
+var favicon = require('serve-favicon');
 var morgan = require('morgan');
 var compression = require('compression');
 var bodyParser = require('body-parser');
@@ -14,8 +14,8 @@ var methodOverride = require('method-override');
 var path = require('path');
 var passport = require('passport');
 var config = loquire.config();
+var cors = require('cors');
 var errorhandler = loquire.components('errorhandler');
-var cors = loquire.components('cors');
 var redirection = loquire.components('redirection');
 
 var app = express();
