@@ -541,6 +541,7 @@ module.exports = function (grunt) {
               'console',
               'file',
               'network-information',
+              'https://github.com/phonostar/PhoneGap-SoftKeyboard.git'
               // 'contacts',
               // 'device',
               // 'device-motion',

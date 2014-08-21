@@ -4,10 +4,10 @@
 
   angular
     .module('linkApp')
-    .controller('MainCtrl', MainCtrl);
-  
+    .controller('CardsCtrl', CardsCtrl);
+
   /* @ngInject */
-  function MainCtrl($scope, $log) {
+  function CardsCtrl($scope, $log) {
     
   }
 

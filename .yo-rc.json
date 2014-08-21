@@ -1,5 +1,5 @@
 {
-  "generator-link": {
+  "generator-moca": {
     "insertRoutes": true,
     "registerRoutesFile": "server/routes.js",
     "routesNeedle": "// Insert routes below",

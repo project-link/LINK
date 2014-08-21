@@ -21,10 +21,12 @@
     <!-- build:css({.tmp,client}) app/app.css -->
     <link rel="stylesheet" href="app/app.css">
       <!-- injector:css -->
-      <link rel="stylesheet" href="app/account/login/login.css">
-      <link rel="stylesheet" href="app/admin/admin.css">
       <link rel="stylesheet" href="app/app.css">
-      <link rel="stylesheet" href="app/main/directives/header/header.css">
+      <link rel="stylesheet" href="app/base.css">
+      <link rel="stylesheet" href="app/landing/landing.css">
+      <link rel="stylesheet" href="app/main/cards/cards.css">
+      <link rel="stylesheet" href="app/main/chat/chat.css">
+      <link rel="stylesheet" href="app/main/create/create.css">
       <link rel="stylesheet" href="app/main/main.css">
       <!-- endinjector -->
     <!-- endbuild -->
@@ -35,7 +37,7 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div ui-view=""></div>
+    <div ui-view="" class="primaryContainer"></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
      <script>
@@ -66,20 +68,36 @@
       <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <script src="bower_components/toastr/toastr.js"></script>
       <script src="bower_components/angular-gettext/dist/angular-gettext.js"></script>
+      <script src="bower_components/restangular/dist/restangular.js"></script>
+      <script src="bower_components/jStorage/jstorage.js"></script>
+      <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="app/account/account.js"></script>
-          <script src="app/account/login/login.controller.js"></script>
-          <script src="app/account/settings/settings.controller.js"></script>
-          <script src="app/account/signup/signup.controller.js"></script>
-          <script src="app/admin/admin.controller.js"></script>
-          <script src="app/admin/admin.js"></script>
+          <script src="app/common/directives/ln-focus-directive.js"></script>
+          <script src="app/common/filters/ln-message-filter.js"></script>
+          <script src="app/common/models/session.js"></script>
+          <script src="app/common/models/users.js"></script>
+          <script src="app/common/services/session-service.js"></script>
+          <script src="app/common/services/storage-service.js"></script>
           <script src="app/constants.js"></script>
-          <script src="app/main/directives/header/header.directive.js"></script>
+          <script src="app/landing/landing.controller.js"></script>
+          <script src="app/landing/landing.js"></script>
+          <script src="app/landing/login/login.controller.js"></script>
+          <script src="app/landing/login/login.js"></script>
+          <script src="app/landing/login/login.service.js"></script>
+          <script src="app/landing/signup/signup.controller.js"></script>
+          <script src="app/landing/signup/signup.js"></script>
+          <script src="app/landing/signup/signup.service.js"></script>
+          <script src="app/main/cards/cards.controller.js"></script>
+          <script src="app/main/cards/cards.js"></script>
+          <script src="app/main/chat/chat.controller.js"></script>
+          <script src="app/main/chat/chat.js"></script>
+          <script src="app/main/create/create.controller.js"></script>
+          <script src="app/main/create/create.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
           <script src="components/directives/mongoose-error/mongoose-error.directive.js"></script>

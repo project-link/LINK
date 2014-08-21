@@ -9,10 +9,10 @@
   /* @ngInject */
   function Config($stateProvider) {
     $stateProvider
-      .state('main', {
-        url: '/main',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+      .state('signup', {
+        url: '/signup',
+        templateUrl: 'app/landing/signup/signup.html',
+        controller: 'SignupCtrl'
       });
   }
   

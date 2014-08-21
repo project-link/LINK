@@ -10,16 +10,22 @@
     'btford.socket-io',
     'ui.router',
     'ui.bootstrap',
-    'gettext'
+    'gettext',
+    'restangular',
+    'ngCordova'
   ])
     .config(config)
     .run(run);
 
 
-  function config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
+  function config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide, RestangularProvider) {
     $urlRouterProvider
       .otherwise('/');
     
+
+    RestangularProvider.setBaseUrl('api');
+
+
     // $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('AuthinterceptorFtry');
 

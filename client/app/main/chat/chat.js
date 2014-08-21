@@ -9,10 +9,10 @@
   /* @ngInject */
   function Config($stateProvider) {
     $stateProvider
-      .state('main', {
-        url: '/main',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
+      .state('chat', {
+        url: '/chat',
+        templateUrl: 'app/main/chat/chat.html',
+        controller: 'ChatCtrl'
       });
   }
   

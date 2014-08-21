@@ -4,10 +4,10 @@
 
   angular
     .module('linkApp')
-    .controller('MainCtrl', MainCtrl);
-  
+    .controller('LandingCtrl', LandingCtrl);
+
   /* @ngInject */
-  function MainCtrl($scope, $log) {
+  function LandingCtrl($scope, $log) {
     
   }
 

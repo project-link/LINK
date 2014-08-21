@@ -4,10 +4,10 @@
 
   angular
     .module('linkApp')
-    .controller('MainCtrl', MainCtrl);
-  
+    .controller('ChatCtrl', ChatCtrl);
+
   /* @ngInject */
-  function MainCtrl($scope, $log) {
+  function ChatCtrl($scope, $log) {
     
   }
 
