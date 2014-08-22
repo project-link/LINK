@@ -77,18 +77,16 @@
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
           <!-- injector:js -->
-          <script src="app/common/directives/ln-focus-directive.js"></script>
           <script src="app/common/filters/ln-message-filter.js"></script>
-          <script src="app/common/models/session.js"></script>
+          <script src="app/common/models/auth.js"></script>
           <script src="app/common/models/users.js"></script>
-          <script src="app/common/services/session-service.js"></script>
+          <script src="app/common/services/auth-service.js"></script>
           <script src="app/common/services/storage-service.js"></script>
           <script src="app/constants.js"></script>
           <script src="app/landing/landing.controller.js"></script>
           <script src="app/landing/landing.js"></script>
           <script src="app/landing/login/login.controller.js"></script>
           <script src="app/landing/login/login.js"></script>
-          <script src="app/landing/login/login.service.js"></script>
           <script src="app/landing/signup/signup.controller.js"></script>
           <script src="app/landing/signup/signup.js"></script>
           <script src="app/landing/signup/signup.service.js"></script>
@@ -98,12 +96,15 @@
           <script src="app/main/chat/chat.js"></script>
           <script src="app/main/create/create.controller.js"></script>
           <script src="app/main/create/create.js"></script>
+          <script src="app/main/create/create.service.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="components/directives/ln-focus/ln-focus.directive.js"></script>
           <script src="components/directives/mongoose-error/mongoose-error.directive.js"></script>
           <script src="components/services/auth/auth.service.js"></script>
           <script src="components/services/auth/user.service.js"></script>
           <script src="components/services/authInterceptor/authInterceptor.factory.js"></script>
+          <script src="components/services/lnNoty/lnNoty.service.js"></script>
           <script src="components/services/socket/socket.service.js"></script>
           <script src="components/translation/translations.js"></script>
           <!-- endinjector -->

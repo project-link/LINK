@@ -2,13 +2,44 @@
     <img src="assets/images/link.png" class="landing-logo-img">
 </a>
 <div class="landing-container">
-    <form name="signupForm" novalidate>
+    <form name="form" novalidate>
         
-        <input type="text" name="name" placeholder="Name.." class="landing-input" required ng-model="user.name" ln-focus="true">
-        <input type="email" name="email" placeholder="Email.." class="landing-input" required ng-model="user.email">
-        <input type="password" name="password" placeholder="Password.." class="landing-input" required ng-model="user.password">
+        <input type="text" name="name" placeholder="Name.." class="landing-input" 
+            required ng-minlength="3" ln-focus="true"
+            ng-model="user.name">
+
+        <input type="email" name="email" placeholder="Email.." class="landing-input" 
+            required 
+            ng-model="user.email">
+
+        <input type="password" name="password" placeholder="Password.." class="landing-input" 
+            required ng-model="user.password">
         
-        <input type="submit" value="Submit" class="landing-btn-sign-complete" ng-click="signup(signupForm)" ng-show="signupForm.$valid">
+        <input type="submit" value="Submit" class="landing-btn-sign-complete" 
+            ng-click="signup(form)" 
+            ng-show="form.$valid">
+        
+
+        <div class="warningMessage" 
+            ng-show="form.name.$invalid && submitted">
+          Please input your full name.
+        </div>
+
+        <div class="warningMessage" 
+            ng-show="form.email.$error.required && submitted">
+          What's your email address?
+        </div>
+
+        <div class="warningMessage"
+            ng-show="form.email.$error.email && submitted">
+            Doesn't look like a valid email.
+        </div>
+
+        <div class="warningMessage"
+            ng-show="form.password.$error.minlength || form.password.$error.required && submitted">
+            Password must be at least 3 characters.
+        </div>
+
     </form>
 </div>
 

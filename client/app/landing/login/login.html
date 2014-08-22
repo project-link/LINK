@@ -2,9 +2,32 @@
     <img src="assets/images/link.png" class="landing-logo-img">
 </a>
 <div class="landing-container">
-    <form name="loginForm" novalidate> 
-        <input type="email" name="name" placeholder="Email.." class="landing-input" required ng-model="user.email" ln-focus="true">
-        <input type="password" name="password" placeholder="Password.." class="landing-input" required ng-model="user.password">
-        <input type="submit" value="Submit" class="landing-btn-sign-complete" ng-click="login(loginForm)" ng-show="loginForm.$valid">
+    <form name="form" novalidate> 
+        <input type="email" name="email" placeholder="Email.." class="landing-input" 
+            required ln-focus="true"
+            ng-model="user.email" >
+
+        <input type="password" name="password" placeholder="Password.." class="landing-input" 
+                required ng-minlength="3" 
+                ng-model="user.password">
+
+        <input type="submit" value="Submit" class="landing-btn-sign-complete" 
+              ng-click="login(form)" 
+              ng-show="form.$valid">
+            
+        <div class="warningMessage"
+            ng-show="form.email.$error.email && submitted">
+            Doesn't look like a valid email.
+        </div>
+
+        <div class="warningMessage" 
+            ng-show="form.email.$error.required && submitted">
+          What's your email address?
+        </div>
+
+        <div class="warningMessage"
+            ng-show="form.password.$error.minlength || form.password.$error.required && submitted">
+            Password must be at least 3 characters.
+        </div>
     </form>
 </div>

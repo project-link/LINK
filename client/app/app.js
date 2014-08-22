@@ -33,7 +33,13 @@
         ['$delegate', '$log', extendExceptionHandler]);
   };
 
-  function run ($rootScope, $location, Auth, gettextCatalog) {
+  function run ($rootScope, $location, $anchorScroll, Auth, gettextCatalog) {
+    
+    $rootScope.scrollTo = function(id) {
+      $location.hash(id);
+      $anchorScroll();
+    }
+
 
     // TODO - default language setting through Locale Info.
     gettextCatalog.currentLanguage = 'ko_KR';

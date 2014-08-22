@@ -7,17 +7,13 @@
     .service('signupService', SignupService);
 
   /* @ngInject */
-  function SignupService(users, sessionService) {
+  function SignupService(authService) {
     
     this.signup = signup;
 
-    //
     function signup (user) {
-    return users.post(user).then(function(response){
-      sessionService.setSession(response.user, response.token);
-      return response;
-    });
-  }
+      authService.signup(user);
+    }
 
 
   }

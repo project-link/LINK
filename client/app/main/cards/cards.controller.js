@@ -7,8 +7,12 @@
     .controller('CardsCtrl', CardsCtrl);
 
   /* @ngInject */
-  function CardsCtrl($scope, $log) {
-    
+  function CardsCtrl($scope, $state, authService) {
+
+    $scope.logout = function() {
+      authService.logout();
+      $state.go('login');
+    }
   }
 
 })();

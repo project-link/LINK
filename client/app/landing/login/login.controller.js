@@ -7,14 +7,12 @@
     .controller('LoginCtrl', LoginCtrl);
 
   /* @ngInject */
-  function LoginCtrl($scope, loginService) {
+  function LoginCtrl($scope, $state, lnNoty, authService) {
     
     $scope.login = login;
-    
+
     init();
 
-
-    ///
 
     function init() {
       showKeyboard();
@@ -35,13 +33,11 @@
 
       if(form.$valid) {
         var user = $scope.user;
-        loginService.login(user)
+        authService.login(user)
           .then(function(response){
-            $state.go('main');
+            $state.go('cards');
           })
-          .catch(function(error){
-            console.log('error:', error);
-          });
+          .catch(lnNoty.error);
       }
     }
 

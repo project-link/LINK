@@ -7,7 +7,7 @@
     .controller('SignupCtrl', SignupCtrl);
 
   /* @ngInject */
-  function SignupCtrl($scope, $state, signupService) {
+  function SignupCtrl($scope, $state, lnNoty, authService) {
 
     $scope.signup = signup;
     $scope.submitted = false;
@@ -18,13 +18,11 @@
 
       if(form.$valid) {
         var user = $scope.user;
-        signupService.signup(user)
+        authService.signup(user)
           .then(function(response){
             $state.go('cards');
           })
-          .catch(function(error){
-            console.log('error:', error);
-          });
+          .catch(lnNoty.error);
       }
     }
 
