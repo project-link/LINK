@@ -10,7 +10,7 @@ router.post('/', function(req, res, next) {
   passport.authenticate('local', function (err, user) {
     if (err) return next(err);
 
-    authentication.sign(user);
+    authentication.sign(user, res);
 
     res.finish({
       data: user

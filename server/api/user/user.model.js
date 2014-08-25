@@ -28,6 +28,26 @@ var UserSchema = new Schema({
   twitter: {},
   google: {},
   github: {}
+}, {
+  toJSON: {
+    virtuals: true,
+    getters: true,
+    transform: function(doc, ret) {
+      delete ret.__v;
+      delete ret._id;
+      delete ret.password;
+      delete ret.salt;
+      delete ret.hashed_password;
+      delete ret.provider;
+      delete ret.facebook;
+      delete ret.twitter;
+      delete ret.google;
+      delete ret.github;
+      if (!ret.deleted) delete ret.deleted;
+
+      return ret;
+    }
+  }
 });
 
 UserSchema

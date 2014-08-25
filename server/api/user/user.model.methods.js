@@ -42,20 +42,6 @@ exports.persist = function(contents) {
   return deferred.promise;
 };
 
-exports.modify = function(contents) {
-  var deferred = Q.defer();
-
-  this.update(contents, function(err, n) {
-    if (err) return deferred.reject(err);
-
-    deferred.resolve(n);
-  });
-
-  return deferred.promise;
-};
-
 exports.delete = function() {
-  return this.modify({
-    deleted_at: new Date()
-  });
+  return this.persist({ deleted_at: new Date() });
 };

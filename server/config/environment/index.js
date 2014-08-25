@@ -14,14 +14,6 @@ var all = {
   // Server port
   port: process.env.PORT || 9000,
 
-  // Secret for session, you will want to change this and make it an environment variable
-  secrets: {
-    session: 'link-secret'
-  },
-
-  // List of user roles
-  userRoles: ['guest', 'user', 'admin'],
-
   // MongoDB connection options
   mongo: {
     options: {
@@ -29,6 +21,11 @@ var all = {
         safe: true
       }
     }
+  },
+
+  token: {
+    secret: 'link',
+    expiresInMinutes: 60 * 24 * 30
   },
 
   facebook: {

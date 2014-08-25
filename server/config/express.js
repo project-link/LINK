@@ -18,6 +18,8 @@ var cors = require('cors');
 var errorhandler = loquire.components('errorhandler');
 var redirection = loquire.components('redirection');
 
+loquire.components('response');
+
 var app = express();
 
 var env = app.get('env');

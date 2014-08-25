@@ -6,8 +6,7 @@ var Q = require('bluebird'),
     ValidationUtil = loquire.utils('validation');
 
 exports.create = function(contents) {
-  return ValidationUtil
-    .requiresAndRemains(
+  return ValidationUtil.requiresAndRemains(
       contents,
       ['email', 'password', 'name'],
       ['email', 'password', 'name', 'description']
@@ -34,8 +33,7 @@ var convertError = function(err, email) {
 };
 
 exports.authenticate = function(contents) {
-  return ValidationUtil
-    .requires(contents, ['email', 'password'])
+  return ValidationUtil.requires(contents, ['email', 'password'])
     .then(function(contents) {
       return User.getByEmail(contents.email);
     })
@@ -56,16 +54,14 @@ exports.read = function(user) {
 };
 
 exports.list = function(options) {
-  return ValidationUtil
-    .options(options)
+  return ValidationUtil.options(options)
     .then(function(options) {
       return User.list(options);
     });
 };
 
 exports.update = function(user, contents) {
-  return ValidationUtil
-    .remains(contents, ['name', 'description'])
+  return ValidationUtil.remains(contents, ['name', 'description'])
     .then(function(contents) {
       return user.persist(contents);
     });
@@ -77,8 +73,7 @@ exports.delete = function(user) {
 
 exports.password = {
   update: function(user, contents) {
-  return ValidationUtil
-    .requires(contents, ['old', 'new'])
+  return ValidationUtil.requires(contents, ['old', 'new'])
     .then(function() {
       return user.authenticate(contents.old);
     })

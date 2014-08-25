@@ -6,17 +6,19 @@ var jwt = require('jsonwebtoken'),
     errors = loquire.config('errors'),
     preloading = require('./preloading');
 
-exports.sign = function(user) {
-  return jwt.sign(
+exports.sign = function(user, res) {
+  var token = jwt.sign(
     {
       id: user.id,
       email: user.email
     },
-    config.secrets.session,
+    config.token.secret,
     {
-      expiresInMinutes: 60*5
+      expiresInMinutes: config.token.expiresInMinutes
     }
   );
+
+  res.setToken(token);
 };
 
 exports.requiresLogin = function(req, res, next) {
@@ -44,6 +46,6 @@ exports.requiresLogin = function(req, res, next) {
   }
 };
 
-exports.isAuthenticated = compose()
+exports.authenticate = compose()
   .use(exports.requiresLogin)
   .use(preloading.requiresMe);

@@ -10,9 +10,9 @@ require('./local/passport').setup();
 
 var router = express.Router();
 
-router.use('/local', require('./local'));
-// router.use('/facebook', require('./facebook'));
-// router.use('/twitter', require('./twitter'));
-// router.use('/google', require('./google'));
+router.use('/auth/local', require('./local'));
+// router.use('/auth/facebook', require('./facebook'));
+// router.use('/auth/twitter', require('./twitter'));
+// router.use('/auth/google', require('./google'));
 
 module.exports = router;
