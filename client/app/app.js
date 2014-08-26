@@ -12,19 +12,17 @@
     'ui.bootstrap',
     'gettext',
     'restangular',
-    'ngCordova'
+    'ngCordova',
+    'ngAnimate-animate.css'
   ])
     .config(config)
     .run(run);
 
 
-  function config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide, RestangularProvider) {
+  function config ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $provide) {
     $urlRouterProvider
       .otherwise('/');
     
-
-    RestangularProvider.setBaseUrl('api');
-
 
     // $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('AuthinterceptorFtry');
@@ -33,12 +31,27 @@
         ['$delegate', '$log', extendExceptionHandler]);
   };
 
-  function run ($rootScope, $location, $anchorScroll, Auth, gettextCatalog) {
+  function run ($rootScope, $location, $anchorScroll, authService, gettextCatalog, Restangular) {
     
     $rootScope.scrollTo = function(id) {
       $location.hash(id);
       $anchorScroll();
     }
+
+    
+    Restangular.setBaseUrl('api');
+    Restangular.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+
+      var extractedData;
+      if (operation === "getList") {
+        extractedData = data.data;
+      } else {
+        extractedData = data;
+      }
+      
+      return extractedData;
+    });
+
 
 
     // TODO - default language setting through Locale Info.
@@ -46,11 +59,11 @@
     
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
-      Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
+
+      if(!authService.isSignin()) {
+        $location.path('/login');
+      }
+      
     });
   }
 

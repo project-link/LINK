@@ -6,7 +6,7 @@ var Q = require('bluebird'),
 
 exports.new = function(contents) {
   var deferred = Q.defer();
-
+  
   contents.users = _.map(contents.users, function(user) {
     return { _id: user };
   });
