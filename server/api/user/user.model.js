@@ -59,12 +59,6 @@ UserSchema
   });
 
 UserSchema
-  .virtual('has_photo')
-  .get(function() {
-    return !!this.photo;
-  });
-
-UserSchema
   .virtual('deleted')
   .get(function() {
     return !!this.deleted_at;

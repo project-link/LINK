@@ -10,6 +10,7 @@ var errors = loquire.config('errors'),
 module.exports = function(app) {
   app.use('/api/', loquire.user());
   app.use('/api/', loquire.auth());
+  app.use('/api/', loquire.link());
 
   app.route('/api/*')
     .all(function(req, res, next) {

@@ -1,6 +1,7 @@
 'use strict';
 
 var UserService = loquire.user('service');
+var LinkService = loquire.link('service');
 
 exports.requiresMe = function(req, res, next) {
   UserService
@@ -29,4 +30,16 @@ exports.requiresUser = function(req, res, next) {
 exports.requiresUserFromMe = function(req, res, next) {
   req.user = req.me;
   next();
+};
+
+exports.requiresLink = function(req, res, next) {
+  LinkService
+    .preload(req.params.link)
+    .then(function(link) {
+      req.link = link;
+      next();
+    })
+    .catch(function(err) {
+      next(err);
+    });
 };

@@ -1,20 +1,19 @@
 'use strict';
 
 var Q = require('bluebird'),
+    _ = require('lodash'),
     errors = loquire.config('errors');
 
 exports.new = function(contents) {
   var deferred = Q.defer();
 
+  contents.users = _.map(contents.users, function(user) {
+    return { _id: user };
+  });
+
   this
     .create(contents, function(err, self) {
-      if (err) {
-        if (err.code === 11000) {
-          return deferred.reject(new errors.UserDuplicatedError(contents.email));
-        } else {
-          return deferred.reject(err);
-        }
-      }
+      if (err) return deferred.reject(err);
 
       deferred.resolve(self);
     });
@@ -49,33 +48,14 @@ exports.get = function(id, includeDeleted) {
   return deferred.promise;
 };
 
-exports.getByEmail = function(email, includeDeleted) {
-  var deferred = Q.defer();
-
-  var conditions = {
-    email: email.toLowerCase()
-  };
-  if (!includeDeleted) conditions.deleted_at = { $exists: false };
-
-  this
-    .findOne(conditions)
-    .exec(function(err, self) {
-      if (err) return deferred.reject(err);
-
-      if (!self) return deferred.reject(new errors.UserNotFoundError(email));
-
-      deferred.resolve(self);
-    });
-
-  return deferred.promise;
-};
-
 exports.list = function() {
   var deferred = Q.defer();
 
   var query = this.find();
 
   query.where('deleted_at').exists(false);
+
+  query.populate('users._id');
 
   query.sort('-created_at');
 

@@ -57,8 +57,10 @@ exports.update = function(req, res, next) {
 
 exports.delete = function(req, res, next) {
   UserService.delete(req.me)
-    .then(function() {
-      res.finish();
+    .then(function(user) {
+      res.finish({
+        data: user
+      });
     })
     .catch(function(err) {
       next(err);
@@ -71,8 +73,10 @@ exports.password.update = function(req, res, next) {
   delete req.body.id;
 
   UserService.password.update(req.me, req.body)
-    .then(function() {
-      res.finish();
+    .then(function(user) {
+      res.finish({
+        data: user
+      });
     })
     .catch(function(err) {
       next(err);

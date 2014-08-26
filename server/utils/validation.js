@@ -41,14 +41,3 @@ exports.requiresAndRemains = function(contents, requireds, valids) {
       return exports.remains(contents, valids);
     });
 };
-
-exports.options = function(options) {
-  return Q.try(function() {
-    if (!options) options = {};
-    if (!options.sort) options.sort = {};
-    if (!options.sort.by) options.sort.by = 'created_at';
-    if (!options.sort.desc) options.sort.desc = false;
-
-    return options;
-  });
-};

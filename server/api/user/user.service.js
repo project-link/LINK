@@ -54,10 +54,7 @@ exports.read = function(user) {
 };
 
 exports.list = function(options) {
-  return ValidationUtil.options(options)
-    .then(function(options) {
-      return User.list(options);
-    });
+  return User.list(options);
 };
 
 exports.update = function(user, contents) {
@@ -71,8 +68,9 @@ exports.delete = function(user) {
   return user.delete();
 };
 
-exports.password = {
-  update: function(user, contents) {
+exports.password = {};
+
+exports.password.update = function(user, contents) {
   return ValidationUtil.requires(contents, ['old', 'new'])
     .then(function() {
       return user.authenticate(contents.old);
@@ -80,5 +78,4 @@ exports.password = {
     .then(function() {
       return user.persist({ password: contents.new });
     });
-  }
 };

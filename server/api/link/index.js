@@ -1,46 +1,38 @@
 'use strict';
 
 var express = require('express');
-var controller = loquire.user('controller');
+var controller = loquire.link('controller');
 var authentication = loquire.components('authentication');
 var preloading = loquire.components('preloading');
 
 var router = express.Router();
 
-router.get('/users', [
+router.get('/links', [
   authentication.authenticate,
   controller.list
 ]);
 
-router.post('/users', [
+router.post('/links', [
+  authentication.authenticate,
   controller.create
 ]);
 
-router.get('/users/me', [
+router.get('/links/:link', [
   authentication.authenticate,
-  preloading.requiresUserFromMe,
+  preloading.requiresLink,
   controller.read
 ]);
 
-router.put('/users/me', [
+router.put('/links/:link', [
   authentication.authenticate,
+  preloading.requiresLink,
   controller.update
 ]);
 
-router.put('/users/me/password', [
+router.delete('/links/:link', [
   authentication.authenticate,
-  controller.password.update
-]);
-
-router.delete('/users/me', [
-  authentication.authenticate,
+  preloading.requiresLink,
   controller.delete
-]);
-
-router.get('/users/:user', [
-  authentication.authenticate,
-  preloading.requiresUser,
-  controller.read
 ]);
 
 module.exports = router;
