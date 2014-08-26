@@ -1,0 +1,22 @@
+<form name="form" novalidate>
+    
+    <input type="text" name="name" placeholder="Name.." class="landing-input" 
+        required ng-minlength="3" ln-focus="true"
+        ng-model="user.name">
+
+    <input type="email" name="email" placeholder="Email.." class="landing-input" 
+        required 
+        ng-model="user.email">
+
+    <input type="password" name="password" placeholder="Password.." class="landing-input" 
+        required ng-model="user.password">
+    
+    <input type="submit" value="Submit" class="landing-btn-sign-complete" 
+        ng-click="submit({form: form, user: user})" 
+        ng-show="form.$valid">
+    
+    <validate-error-email></validate-error-email>
+    <validate-error-name></validate-error-name>        
+    <validate-error-password></validate-error-email>
+
+</form>

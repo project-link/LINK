@@ -1,0 +1,12 @@
+<a ng-click="menuToggle=!menuToggle" >
+    <div class="header-bedge">
+        <div class="header-bedge-text">
+            10
+        </div>
+    </div>
+</a>
+
+<div class="header-menu-container" ng-class="{'dn-flip-x':true}" ng-show="menuToggle" ng-init="menuToggle=false">
+    <input type="button" value="mark all as read" class="header-btn-menu">
+    <input type="button" value="Off - 1 hour" class="header-btn-menu">
+</div>

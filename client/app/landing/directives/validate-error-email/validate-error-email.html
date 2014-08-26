@@ -1,0 +1,9 @@
+<div class="warningMessage" 
+    ng-show="form.email.$error.required && submitted">
+  What's your email address?
+</div>
+
+<div class="warningMessage"
+    ng-show="form.email.$error.email && submitted">
+    Doesn't look like a valid email.
+</div>

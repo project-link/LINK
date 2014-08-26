@@ -1,0 +1,21 @@
+<div ng-repeat="message in card.messages | lnMessage">
+    <div class="card-chat" ng-show="message.from.id != message.preMessage.from.id">
+        <img src="assets/images/avatar.png" class="card-chat-user-photo">
+        <div class="card-chat-msg-container"  >
+            <div class="card-chat-name-text" ng-bind="message.from.name">
+            </div>
+            <div class="card-chat-date-text" ng-bind="message.create_at">
+            </div>
+            <div class="card-chat-message-text" ng-bind="message.text">
+            </div>
+        </div>
+    </div>
+    <div class="card-chat" ng-show="message.from.id == message.preMessage.from.id">
+        <div class="card-chat-msg-continue-container"  >
+            <div class="card-chat-message-text" ng-bind="message.text">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card-chat-line">
+</div>

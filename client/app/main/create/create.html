@@ -1,39 +1,15 @@
-<div class="header-container">
-    <div class="header-left-container">
-        <input type="button" value="close" class="header-left-btn-close" ui-sref="cards">
-    </div>
-</div>
-<div class="content-container">
-    <div class="create-room-join-members-panel">
-        <div class="create-room-join-members-card">
-            <img src="assets/images/avatar.png" 
-                class="create-room-user-photo" 
-                ng-class="{'dn-fade':true}"
-                ng-show="checkedUser"
-                ng-repeat="checkedUser in link.users"
-                ng-click="checkUser(checkedUser)">
-        </div>
-    </div>
-    
-    <div class="panel-name" ng-class="{'dn-lightspeed':true}" ng-show="link.users.length > 1">
-        <input type="text" placeholder="링크명을 입력해 주세요." class="create-room-input" ng-model="link.name" required>
-    </div>
-    <div class="panel-users">
-        <div class="card" 
-            ng-class="{'card-checked':user.checked==true}"
-            ng-repeat="user in users | filter:search"
-            ng-init="user.checked=false" ng-click="checkUser(user)">
+<header-container>
+    <header-menu-close></header-menu-close>
+</header-container>
 
-            <img src="assets/images/avatar.png" class="create-room-user-photo">
-            <div class="create-room-name-text" ng-bind="user.name">
-            </div>
-        </div>
-    </div>
-</div>
-<div href="cards.html" class="footer-container">
-    <input type="button" value="&lt;" class="footer-left-btn-back" ui-sref="main">
-    <div class="footer-input-group">
-        <input type="text" placeholder="이름 or 링크명을  입력해 주세요." class="footer-input" ng-model="search">
-    </div>
-    <input type="button" value="+" class="footer-right-btn-create" ng-click="createLink(link)">
-</div>
+<content-container>
+    
+    <panel-join-members></panel-join-members>
+    <panel-link-name></panel-link-name>
+    <panel-users></panel-users>
+
+</content-container>
+
+<footer-container>
+    <footer-create></footer-create>
+</footer-container>

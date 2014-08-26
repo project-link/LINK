@@ -1,0 +1,10 @@
+<div class="create-room-join-members-panel">
+    <div class="create-room-join-members-card">
+        <img src="assets/images/avatar.png" 
+            class="create-room-user-photo" 
+            ng-class="{'dn-fade':true}"
+            ng-show="checkedUser"
+            ng-repeat="checkedUser in link.users"
+            ng-click="checkUser(checkedUser)">
+    </div>
+</div>

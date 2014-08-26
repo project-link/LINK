@@ -28,11 +28,10 @@
       }
     }
     
-    function login(form) {
+    function login(form, user) {
       $scope.submitted = true;
 
       if(form.$valid) {
-        var user = $scope.user;
         authService.login(user)
           .then(function(response){
             $state.go('cards');

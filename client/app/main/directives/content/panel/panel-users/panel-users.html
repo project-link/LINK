@@ -1,0 +1,11 @@
+<div class="panel-users">
+    <div class="card" 
+        ng-class="{'card-checked':user.checked==true}"
+        ng-repeat="user in users | filter:search"
+        ng-init="user.checked=false" ng-click="checkUser(user)">
+
+        <img src="assets/images/avatar.png" class="create-room-user-photo">
+        <div class="create-room-name-text" ng-bind="user.name">
+        </div>
+    </div>
+</div>

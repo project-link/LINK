@@ -1,0 +1,8 @@
+<form>
+    <input type="button" value="&lt;" class="footer-left-btn-back">
+    <div class="footer-input-group">
+        <input type="text" placeholder="text messages..." class="footer-input" ng-model="text" ln-focus="isFocus">
+    </div>
+    <!-- <input type="button" value="+" class="footer-right-btn-create"> -->
+    <input type="submit" value="send" class="footer-right-btn-send" ng-click="sendMessage(text); isFocus=!isFocus" ng-init="isFocus=true">
+</form>

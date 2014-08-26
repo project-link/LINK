@@ -8,16 +8,15 @@
 
   /* @ngInject */
   function SignupCtrl($scope, $state, lnNoty, authService) {
-
+    
     $scope.signup = signup;
     $scope.submitted = false;
-
-    function signup (form) {
+    
+    function signup (form, user) {
 
       $scope.submitted = true;
 
       if(form.$valid) {
-        var user = $scope.user;
         authService.signup(user)
           .then(function(response){
             $state.go('cards');
