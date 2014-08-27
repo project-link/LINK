@@ -30,14 +30,14 @@
 
     function login (user) {
       return auth.customPOST(user, 'local').then(function(response){
-        setSession(response.user, response.token);
+        setSession(response.data, response.token);
         return response;
       });      
     }
 
     function signup (user) {
       return users.post(user).then(function(response){
-        setSession(response.user, response.token);
+        setSession(response.data, response.token);
         return response;
       });
     }

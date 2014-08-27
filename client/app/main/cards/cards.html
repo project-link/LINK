@@ -6,14 +6,13 @@
 <content-container id="top">
     
 
-    <card-content ng-repeat="card in cards|orderBy:'-create_at'">
-        <card-chat-group ng-show="card.link.linkType=='GROUP'">
+    <card-content ng-repeat="card in cards|orderBy:'-create_at'" ui-sref="chat({cardId: card.id})">
+        <card-chat-group ng-show="card.link.users.length > 2">
         </card-chat-group>
         
-        <card-chat-group ng-show="card.link.linkType=='SOLO'">
+        <card-chat-group ng-show="card.link.users.length <= 2">
         </card-chat-group>
     </card-content>
-
 
     <!-- Example Data -->
     <a href="" ui-sref="chat" class="card">

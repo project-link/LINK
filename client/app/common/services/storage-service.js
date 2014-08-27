@@ -1,7 +1,13 @@
-'use strict';
+(function() {
 
-angular.module('linkApp')
-  .service('storageService', function StorageService() {
+  'use strict';
+
+  angular
+    .module('linkApp')
+    .service('storageService', storageService);
+
+  /* @ngInject */
+  function storageService() {
     this.setValue = function(key, value, options) {
       angular.element.jStorage.set(key, value, options);
     };
@@ -25,4 +31,6 @@ angular.module('linkApp')
       var hour = ttl * 3600000;
       angular.element.jStorage.setTTL(key, hour);
     };
-  });
+  }
+
+})();

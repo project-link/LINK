@@ -96,6 +96,7 @@
       <script src="bower_components/jStorage/jstorage.js"></script>
       <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
       <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/moment/moment.js"></script>
       <!-- endbower -->
     <!-- endbuild -->
 
@@ -103,9 +104,12 @@
         <script src="app/app.js"></script>
           <!-- injector:js -->
           <script src="app/animate.js"></script>
-          <script src="app/common/filters/ln-message-filter.js"></script>
+          <script src="app/common/filters/ln-message/ln-message.filter.js"></script>
+          <script src="app/common/filters/ln-moment/ln-moment.filter.js"></script>
           <script src="app/common/models/auth.js"></script>
+          <script src="app/common/models/cards.js"></script>
           <script src="app/common/models/links.js"></script>
+          <script src="app/common/models/messages.js"></script>
           <script src="app/common/models/users.js"></script>
           <script src="app/common/services/auth-service.js"></script>
           <script src="app/common/services/storage-service.js"></script>
@@ -127,8 +131,10 @@
           <script src="app/landing/signup/signup.service.js"></script>
           <script src="app/main/cards/cards.controller.js"></script>
           <script src="app/main/cards/cards.js"></script>
+          <script src="app/main/cards/cards.service.js"></script>
           <script src="app/main/chat/chat.controller.js"></script>
           <script src="app/main/chat/chat.js"></script>
+          <script src="app/main/chat/chat.service.js"></script>
           <script src="app/main/create/create.controller.js"></script>
           <script src="app/main/create/create.js"></script>
           <script src="app/main/create/create.service.js"></script>

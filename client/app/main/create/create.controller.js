@@ -6,6 +6,7 @@
     .module('linkApp')
     .controller('CreateCtrl', CreateCtrl);
 
+  /* @ngInject */
   function CreateCtrl($scope, $state, $rootScope, lnNoty, create) {
     
     $scope.card = {};
@@ -21,10 +22,15 @@
     
 
     init();
-
+  
     function init() {
-      getUsers();
+
+      initData();
     }
+
+    function initData() {
+      getUsers();
+    }  
 
     function getUsers() {
       create.getUsers().then(function(users){
@@ -53,12 +59,14 @@
       linkData.users = _.map(linkData.users, function(user) {
         return user.id;
       });
+
+      linkData.users.push($rootScope.sessionInfo.user.id);
+
+      console.log(linkData.users);
       
       create
         .createLink(linkData)
         .then(function(response){
-          lnNoty.success('Success');
-          
           var link = response.data;
           createCard(link);
 
@@ -67,7 +75,20 @@
     }
     
     function createCard (link) {
-      $state.go('chat');
+
+      var card = {
+        type: 'CHAT',
+        link: link.id
+      };
+
+      create
+        .createCard(card)
+        .then(function(response){
+          console.log('response.data:', response.data)
+          var cardId = response.data.id;
+          $state.go('chat', {cardId: cardId});
+        })
+      
     }
   }
 

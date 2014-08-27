@@ -57,13 +57,22 @@
     // TODO - default language setting through Locale Info.
     gettextCatalog.currentLanguage = 'ko_KR';
     
+
+
+    var loginNotRequired = ['landing', 'signup', 'login'];
+
+    var isLoginNotRequired = function (route) {
+      return _.find(loginNotRequired,
+        function (noAuthRoute) {
+          return route === noAuthRoute;
+        });
+    };
+
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$stateChangeStart', function (event, next) {
-
-      if(!authService.isSignin()) {
-        $location.path('/login');
+      if(!isLoginNotRequired(next.name) && !authService.isSignin()) {
+        $location.url('login');
       }
-      
     });
   }
 

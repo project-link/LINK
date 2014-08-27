@@ -1,21 +1,22 @@
-<div ng-repeat="message in card.messages | lnMessage">
+<div ng-repeat="message in card.messages | orderBy: 'created_at'| lnMessage">
     <div class="card-chat" ng-show="message.from.id != message.preMessage.from.id">
         <img src="assets/images/avatar.png" class="card-chat-user-photo">
         <div class="card-chat-msg-container"  >
             <div class="card-chat-name-text" ng-bind="message.from.name">
             </div>
-            <div class="card-chat-date-text" ng-bind="message.create_at">
+            <div class="card-chat-message-text">
+                {{message.text}} <span class="card-chat-message-date">{{message.created_at | lnMoment}}</span>
             </div>
-            <div class="card-chat-message-text" ng-bind="message.text">
-            </div>
+            
         </div>
     </div>
     <div class="card-chat" ng-show="message.from.id == message.preMessage.from.id">
         <div class="card-chat-msg-continue-container"  >
-            <div class="card-chat-message-text" ng-bind="message.text">
+            <div class="card-chat-message-text">
+                {{message.text}} <span class="card-chat-message-date">{{message.created_at | lnMoment}}</span>
             </div>
         </div>
     </div>
 </div>
-<div class="card-chat-line">
+<div id="card-chat-line" class="card-chat-line">
 </div>

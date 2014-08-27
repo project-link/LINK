@@ -5,7 +5,8 @@
         ng-init="user.checked=false" ng-click="checkUser(user)">
 
         <img src="assets/images/avatar.png" class="create-room-user-photo">
-        <div class="create-room-name-text" ng-bind="user.name">
+        <div class="create-room-name-text">
+          {{user.name}} <span class="create-room-email-text">({{user.email}})</span>
         </div>
     </div>
 </div>

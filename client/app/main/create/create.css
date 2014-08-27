@@ -120,6 +120,12 @@
   padding: 17px 10px 10px 10px;
 }
 
+/* class: create-room-name-text used 2 times */
+.create-room-email-text {  
+  font-size: 0.8em;  
+  font-weight: 400;
+}
+
 /* class: header-left-btn-close used 1 times */
 .header-left-btn-close {  
   float: none;  

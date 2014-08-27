@@ -4,13 +4,13 @@
 
   angular
     .module('linkApp')
-    .factory('links', links);
-  
+    .factory('cards', cards);
+
   /* @ngInject */
-  function links(Restangular) {
-    var model = Restangular.all('links');
+  function cards(Restangular) {
+    var model = Restangular.all('cards');
     model.one = function(id) {
-      return Restangular.one('links', id);
+      return Restangular.one('cards', id);
     };
 
     return model;

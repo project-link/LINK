@@ -1,8 +1,13 @@
-'use strict';
+(function() {
 
-angular.module('linkApp')
+  'use strict';
 
-  .filter('lnMessage', function() {
+  angular
+    .module('linkApp')
+    .filter('lnMessage', LnMessage);
+
+  /* @ngInject */
+  function LnMessage() {
 
     return function(messages) {
 
@@ -16,4 +21,6 @@ angular.module('linkApp')
 
       return filtered;
     };
-  })
+  }
+
+})();
