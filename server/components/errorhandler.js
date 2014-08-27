@@ -10,6 +10,9 @@ var status = function(err) {
     case 'NOT_SELF':
       return 403;
     case 'USER_NOT_FOUND':
+    case 'LINK_NOT_FOUND':
+    case 'CARD_NOT_FOUND':
+    case 'MESSAGE_NOT_FOUND':
     case 'API_NOT_FOUND':
       return 404;
     case 'USER_DUPLICATED':

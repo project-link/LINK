@@ -47,6 +47,27 @@ function UserNotFoundError(id, message) {
   return e;
 }
 
+function LinkNotFoundError(id, message) {
+  message = message || 'Link:' + id + ' is not found.';
+  var e = LINKError.call(this, 'LinkNotFoundError', 'LINK_NOT_FOUND', message);
+  e.id = id;
+  return e;
+}
+
+function CardNotFoundError(id, message) {
+  message = message || 'Card:' + id + ' is not found.';
+  var e = LINKError.call(this, 'CardNotFoundError', 'CARD_NOT_FOUND', message);
+  e.id = id;
+  return e;
+}
+
+function MessageNotFoundError(id, message) {
+  message = message || 'Message:' + id + ' is not found.';
+  var e = LINKError.call(this, 'MessageNotFoundError', 'MESSAGE_NOT_FOUND', message);
+  e.id = id;
+  return e;
+}
+
 function ApiNotFoundError(url, message) {
   message = message || 'No resource for url:' + url + ' is found.';
   var e = LINKError.call(this, 'ApiNotFoundError', 'API_NOT_FOUND', message);
@@ -114,6 +135,9 @@ module.exports = {
   TokenExpiredError: TokenExpiredError,
   NotSelfError: NotSelfError,
   UserNotFoundError: UserNotFoundError,
+  LinkNotFoundError: LinkNotFoundError,
+  CardNotFoundError: CardNotFoundError,
+  MessageNotFoundError: MessageNotFoundError,
   ApiNotFoundError: ApiNotFoundError,
   UserDuplicatedError: UserDuplicatedError,
   UserMismatchError: UserMismatchError,

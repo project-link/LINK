@@ -29,13 +29,13 @@ exports.get = function(id, includeDeleted) {
     .exec(function(err, self) {
       if (err) {
         if (err.name === 'CastError' && err.type === 'ObjectId') {
-          return deferred.reject(new errors.LinkNotFoundError(id));
+          return deferred.reject(new errors.MessageNotFoundError(id));
         } else {
           return deferred.reject(err);
         }
       }
 
-      if (!self) return deferred.reject(new errors.LinkNotFoundError(id));
+      if (!self) return deferred.reject(new errors.MessageNotFoundError(id));
 
       deferred.resolve(self);
     });
@@ -50,7 +50,7 @@ exports.list = function() {
 
   query.where('deleted_at').exists(false);
 
-  query.populate('_users._id');
+  query.populate('from card');
 
   query.sort('-created_at');
 

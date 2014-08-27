@@ -26,7 +26,7 @@ exports.delete = function() {
 exports.specify = function() {
   var deferred = Q.defer();
 
-  this.populate('_users._id', function(err, self) {
+  this.populate('from card', function(err, self) {
     if (err) return deferred.reject(err);
 
     deferred.resolve(self);

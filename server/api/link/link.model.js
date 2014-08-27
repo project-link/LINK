@@ -2,6 +2,7 @@
 
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var _ = require('lodash');
 
 var MemberSchema = new Schema({
   _id: {
@@ -61,6 +62,7 @@ MemberSchema
 var LinkSchema = new Schema({
   name: String,
   description: String,
+  _users: [MemberSchema],
   created_at: {
     type: Date,
     default: Date.now,
@@ -69,8 +71,7 @@ var LinkSchema = new Schema({
   deleted_at: {
     type: Date,
     index: true
-  },
-  users: [MemberSchema]
+  }
 }, {
   toJSON: {
     virtuals: true,
@@ -78,12 +79,24 @@ var LinkSchema = new Schema({
     transform: function(doc, ret) {
       delete ret.__v;
       delete ret._id;
+      delete ret._users;
       if (!ret.deleted) delete ret.deleted;
 
       return ret;
     }
   }
 });
+
+LinkSchema
+  .virtual('users')
+  .set(function(users) {
+    this._users = _.map(users, function(user) {
+      return { _id: user };
+    });
+  })
+  .get(function() {
+    return this._users;
+  });
 
 LinkSchema
   .virtual('deleted')
