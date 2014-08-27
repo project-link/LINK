@@ -13,6 +13,7 @@ module.exports = function(app) {
   app.use('/api/', loquire.link());
   app.use('/api/', loquire.card());
   app.use('/api/', loquire.message());
+  app.use('/api/', loquire.photo());
 
   app.route('/api/*')
     .all(function(req, res, next) {

@@ -4,6 +4,7 @@ var UserService = loquire.user('service');
 var LinkService = loquire.link('service');
 var CardService = loquire.card('service');
 var MessageService = loquire.message('service');
+var PhotoService = loquire.photo('service');
 
 exports.requiresMe = function(req, res, next) {
   UserService
@@ -63,6 +64,18 @@ exports.requiresMessage = function(req, res, next) {
     .preload(req.params.message)
     .then(function(message) {
       req.message = message;
+      next();
+    })
+    .catch(function(err) {
+      next(err);
+    });
+};
+
+exports.requiresPhoto = function(req, res, next) {
+  PhotoService
+    .preload(req.params.photo)
+    .then(function(photo) {
+      req.photo = photo;
       next();
     })
     .catch(function(err) {
