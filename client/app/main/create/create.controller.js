@@ -10,10 +10,13 @@
   function CreateCtrl($scope, $state, $rootScope, lnNoty, create) {
     
     $scope.card = {};
-    $scope.users = {};
+    
+    $scope.users = [];
 
     $scope.link = {};
     $scope.link.users = [];
+
+
 
     
     $scope.checkUser = checkUser;
@@ -21,18 +24,17 @@
     $scope.createCard = createCard;
     
 
-    init();
+    activate();
   
-    function init() {
-
+    function activate() {
       initData();
     }
 
     function initData() {
-      getUsers();
+      initUsers();
     }  
 
-    function getUsers() {
+    function initUsers() {
       create.getUsers().then(function(users){
         $scope.users = users;
       }, function(error){
@@ -41,8 +43,6 @@
     }
 
     function checkUser (user) {
-      user.checked = !user.checked;
-      
       if(user.checked) {
         $scope.link.users.push(user);
       } else {
@@ -53,22 +53,11 @@
 
     function createLink (link) {
 
-      var linkData = {};
-      angular.copy(link, linkData);
-
-      linkData.users = _.map(linkData.users, function(user) {
-        return user.id;
-      });
-
-      linkData.users.push($rootScope.sessionInfo.user.id);
-
-      console.log(linkData.users);
-      
       create
-        .createLink(linkData)
+        .createLink(link)
         .then(function(response){
-          var link = response.data;
-          createCard(link);
+          var linkData = response.data;
+          createCard(linkData);
 
         })
         .catch(lnNoty.error);
@@ -84,12 +73,20 @@
       create
         .createCard(card)
         .then(function(response){
-          console.log('response.data:', response.data)
           var cardId = response.data.id;
           $state.go('chat', {cardId: cardId});
         })
-      
     }
+
+    $rootScope.$on('create:check-user', function(evt, user){
+      checkUser(user);
+    });
+
+    $rootScope.$on('create:create-link', function(evt, link){
+      createLink(link);
+    });
+
+
   }
 
 })();
