@@ -15,6 +15,15 @@
         submit: "&"
       },
       link: function (scope, element, attrs) {
+        scope.login = login;
+
+        function login(form) {
+          scope.submitted = true;
+
+          if(form.$valid) {
+            scope.submit({user: scope.user})
+          }
+        }
       }
     };
   }

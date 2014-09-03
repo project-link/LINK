@@ -15,6 +15,16 @@
         submit: "&"
       },
       link: function (scope, element, attrs) {
+
+        scope.signup = signup;
+
+        function signup(form) {
+          scope.submitted = true;
+
+          if(form.$valid) {
+            scope.submit({user: scope.user})
+          }
+        }
       }
     };
   }

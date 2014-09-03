@@ -11,13 +11,14 @@
     
     $scope.login = login;
 
-    init();
+    activate();
 
 
-    function init() {
+
+    function activate() {
       showKeyboard();
     };
-    
+
     function showKeyboard() {
       if(typeof SoftKeyboard !== 'undefined') {
         SoftKeyboard.show(function () {
@@ -28,16 +29,12 @@
       }
     }
     
-    function login(form, user) {
-      $scope.submitted = true;
-
-      if(form.$valid) {
-        authService.login(user)
-          .then(function(response){
-            $state.go('cards');
-          })
-          .catch(lnNoty.error);
-      }
+    function login(user) {
+      authService.login(user)
+        .then(function(response){
+          $state.go('cards');
+        })
+        .catch(lnNoty.error);
     }
 
   };

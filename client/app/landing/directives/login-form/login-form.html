@@ -8,7 +8,7 @@
             ng-model="user.password">
 
     <input type="submit" value="Submit" class="landing-btn-sign-complete" 
-          ng-click="submit({form: form, user: user})" 
+          ng-click="login(form)" 
           ng-show="form.$valid">
 
     <validate-error-email></validate-error-email>
