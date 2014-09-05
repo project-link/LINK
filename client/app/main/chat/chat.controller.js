@@ -22,6 +22,7 @@
     function activate(){
       initState();
       initData();
+      initEvents();
     };
 
     function initState() {
@@ -33,6 +34,12 @@
 
     function initData() {
       initMessages();
+    };
+
+    function initEvents() {
+      $scope.$on('onRepeatLast', function(scope, element, attrs){
+        $rootScope.scrollTo('card-chat-line');
+      });
     };
     
     function sendMessage(text) {
@@ -51,7 +58,6 @@
 
           //TEST 
           initMessages();
-          $rootScope.scrollTo('card-chat-line');
         });
     }
 

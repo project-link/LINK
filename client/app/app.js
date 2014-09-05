@@ -13,7 +13,7 @@
     'gettext',
     'restangular',
     'ngCordova',
-    'ngAnimate-animate.css'
+    'ngAnimate-animate.css',
   ])
     .config(config)
     .run(run);
@@ -31,11 +31,14 @@
         ['$delegate', '$log', extendExceptionHandler]);
   };
 
-  function run ($rootScope, $location, $anchorScroll, authService, gettextCatalog, Restangular) {
+  function run ($rootScope, $location, $anchorScroll, $timeout, authService, gettextCatalog, Restangular) {
     
     $rootScope.scrollTo = function(id) {
-      $location.hash(id);
-      $anchorScroll();
+
+      $timeout(function() {
+        $location.hash(id);
+        $anchorScroll();
+      }, 1);
     }
 
     
