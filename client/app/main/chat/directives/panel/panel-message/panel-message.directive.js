@@ -4,11 +4,11 @@
 
   angular
     .module('linkApp')
-    .directive('cardChatSolo', CardChatSoloDrtv);
+    .directive('panelMessage', PanelMessageDrtv);
 
-  function CardChatSoloDrtv() {
+  function PanelMessageDrtv() {
     return {
-      templateUrl: 'app/main/directives/content/card/card-chat-solo/card-chat-solo.html',
+      templateUrl: 'app/main/chat/directives/panel/panel-message/panel-message.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
       }

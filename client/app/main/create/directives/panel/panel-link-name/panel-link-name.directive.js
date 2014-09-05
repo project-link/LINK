@@ -9,7 +9,7 @@
   /* @ngInject */
   function PanelLinkName() {
     return {
-      templateUrl: 'app/main/directives/content/panel/panel-link-name/panel-link-name.html',
+      templateUrl: 'app/main/create/directives/panel/panel-link-name/panel-link-name.html',
       restrict: 'EA',
       scope: {
         link: "="

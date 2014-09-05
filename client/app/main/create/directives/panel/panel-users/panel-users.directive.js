@@ -9,7 +9,7 @@
   /* @ngInject */
   function PanelUsers($rootScope) {
     return {
-      templateUrl: 'app/main/directives/content/panel/panel-users/panel-users.html',
+      templateUrl: 'app/main/create/directives/panel/panel-users/panel-users.html',
       restrict: 'EA',
       scope: {
         users: "="

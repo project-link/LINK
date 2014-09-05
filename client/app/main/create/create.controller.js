@@ -78,15 +78,14 @@
         })
     }
 
-    $rootScope.$on('create:check-user', function(evt, user){
+    $scope.$on('create:check-user', function(evt, user){
       checkUser(user);
     });
 
-    $rootScope.$on('create:create-link', function(evt, link){
+    $scope.$on('create:create-link', function(evt, link){
+      console.log('create:create-link');
       createLink(link);
     });
-
-
   }
 
 })();

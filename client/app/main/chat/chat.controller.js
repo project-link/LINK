@@ -15,30 +15,24 @@
     $scope.sendMessage = sendMessage;
     
 
-    init();
+    activate();
+
     
 
-    function init(){
-      config();
+    function activate(){
+      initState();
       initData();
     };
 
-    function config(){
+    function initState() {
       $scope.card = {
         id: $stateParams.cardId,
         from: $rootScope.sessionInfo.user.id
       };
-    };
+    }
 
     function initData() {
-      
       initMessages();
-      
-      setInterval(function() {
-        console.log('timeout...');
-        initMessages();
-        $rootScope.scrollTo('card-chat-line');
-      }, 5000);
     };
     
     function sendMessage(text) {
@@ -53,8 +47,6 @@
       chatService
         .sendMessage(message)
         .then(function(response){
-
-          console.log($scope.card.text)
           $scope.card.text = '';
 
           //TEST 

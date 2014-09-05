@@ -13,6 +13,9 @@
       templateUrl: 'app/main/directives/content/card/card.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
+        element.bind('mouseover', function() {
+          element.css('cursor', 'pointer');
+        });
       }
     };
   }

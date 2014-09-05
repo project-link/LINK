@@ -43,7 +43,7 @@
     }
 
     function setDefaultLinkName(linkData) {
-      linkData.name = linkData.users[0].name + ', ' + linkData.users[1].name + ' + ' + (linkData.users.length - 1);
+      linkData.name = linkData.users[0].name + ' ' + ' + ' + (linkData.users.length);
     }
 
   }

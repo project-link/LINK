@@ -9,7 +9,7 @@
   /* @ngInject */
   function PanelJoinMembers($rootScope) {
     return {
-      templateUrl: 'app/main/directives/content/panel/panel-join-members/panel-join-members.html',
+      templateUrl: 'app/main/create/directives/panel/panel-join-members/panel-join-members.html',
       restrict: 'EA',
       scope: {
         users: "="

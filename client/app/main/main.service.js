@@ -4,10 +4,10 @@
 
   angular
     .module('linkApp')
-    .service('cardsService', cardsService);
+    .service('mainService', mainService);
 
   /* @ngInject */
-  function cardsService(cards) {
+  function mainService(cards) {
 
     this.getCards = getCards;
 

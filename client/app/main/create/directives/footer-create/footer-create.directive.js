@@ -9,7 +9,7 @@
   /* @ngInject */
   function FooterCreate($rootScope) {
     return {
-      templateUrl: 'app/main/directives/footer/footer-create/footer-create.html',
+      templateUrl: 'app/main/create/directives/footer-create/footer-create.html',
       restrict: 'EA',
       scope: {
         link: "="
@@ -18,6 +18,7 @@
         scope.createLink = createLink;
 
         function createLink(link) {
+          console.log('createLink');
           $rootScope.$broadcast('create:create-link', link);
         };
       }
