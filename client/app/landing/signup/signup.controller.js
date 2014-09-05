@@ -13,7 +13,7 @@
     function signup (user) {
         authService.signup(user)
           .then(function(response){
-            $state.go('cards');
+            $state.go('main');
           })
           .catch(lnNoty.error);
     }
